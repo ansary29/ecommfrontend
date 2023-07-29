@@ -21,6 +21,8 @@ import {
 } from '../constants/orderConstants'
 import { logout } from './userActions'
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -38,7 +40,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post(`https://ecommerce-vty0.onrender.com/api/orders`, order, config)
+    const { data } = await axios.post(`${API_URL}/api/orders`, order, config)
 
     dispatch({
       type: ORDER_CREATE_SUCCESS,
@@ -75,7 +77,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`https://ecommerce-vty0.onrender.com/api/orders/${id}`, config)
+    const { data } = await axios.get(`${API_URL}/api/orders/${id}`, config)
 
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
@@ -117,7 +119,7 @@ export const payOrder = (orderId, paymentResult) => async (
     }
 
     const { data } = await axios.put(
-      `https://ecommerce-vty0.onrender.com/api/orders/${orderId}/pay`,
+      `${API_URL}/api/orders/${orderId}/pay`,
       paymentResult,
       config
     )
@@ -158,7 +160,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `https://ecommerce-vty0.onrender.com/api/orders/${order._id}/deliver`,
+      `${API_URL}/api/orders/${order._id}/deliver`,
       {},
       config
     )
@@ -198,7 +200,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`https://ecommerce-vty0.onrender.com/api/orders/myorders`, config)
+    const { data } = await axios.get(`${API_URL}/api/orders/myorders`, config)
 
     dispatch({
       type: ORDER_LIST_MY_SUCCESS,
@@ -235,7 +237,7 @@ export const listOrders = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`https://ecommerce-vty0.onrender.com/api/orders`, config)
+    const { data } = await axios.get(`${API_URL}/api/orders`, config)
 
     dispatch({
       type: ORDER_LIST_SUCCESS,

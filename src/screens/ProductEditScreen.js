@@ -10,6 +10,9 @@ import { FaArrowLeft } from 'react-icons/fa'
 import { listProductDetails, updateProduct } from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 import { listCategories } from '../actions/categoryActions'
+
+const API_URL = process.env.REACT_APP_API_URL;
+
 const ProductEditScreen = ({ match, history }) => {
   const productId = match.params.id
 
@@ -74,7 +77,7 @@ const ProductEditScreen = ({ match, history }) => {
         },
       }
 
-      const { data } = await axios.post('https://ecommerce-vty0.onrender.com/api/upload', formData, config)
+      const { data } = await axios.post(`${API_URL}/api/upload`, formData, config)
 
       console.log(data, "LDAA")
 

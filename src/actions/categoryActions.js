@@ -18,6 +18,8 @@ import {
 } from '../constants/categoryConstants'
 import { logout } from './userActions'
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export const listCategories = () => async (
     dispatch
 ) => {
@@ -29,7 +31,7 @@ export const listCategories = () => async (
         const {
             data
         } = await axios.get(
-            `https://ecommerce-vty0.onrender.com/api/category`
+            `${API_URL}/api/category`
         )
 
         dispatch({
@@ -53,7 +55,7 @@ export const getCategoryById = (id) => async (dispatch) => {
 
         const {
             data
-        } = await axios.get(`https://ecommerce-vty0.onrender.com/api/category/${id}`)
+        } = await axios.get(`${API_URL}/api/category/${id}`)
 
         dispatch({
             type: CATEGORY_DETAILS_SUCCESS,
@@ -86,7 +88,7 @@ export const deleteCategory = (id) => async (dispatch, getState) => {
             },
         }
 
-        await axios.delete(`https://ecommerce-vty0.onrender.com/api/category/${id}`, config)
+        await axios.delete(`${API_URL}/api/category/${id}`, config)
 
         dispatch({
             type: CATEGORY_DELETE_SUCCESS,
@@ -126,7 +128,7 @@ export const createCategory = () => async (dispatch, getState) => {
 
         const {
             data
-        } = await axios.post(`https://ecommerce-vty0.onrender.com/api/category`, {
+        } = await axios.post(`${API_URL}/api/category`, {
             name: '',
             description: ''
         }, config)
@@ -172,7 +174,7 @@ export const updateCategory = (category) => async (dispatch, getState) => {
         const {
             data
         } = await axios.put(
-            `https://ecommerce-vty0.onrender.com/api/category/${category._id}`,
+            `${API_URL}/api/category/${category._id}`,
             category,
             config
         )
